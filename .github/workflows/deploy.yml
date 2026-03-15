@@ -24,10 +24,13 @@ jobs:
         # Authenticates Docker using doctl
         run: doctl registry login --expiry-seconds 600
 
+      - name: Set SHORT_SHA env variable
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
       - name: Build container image
         run: |
           docker build \
-            -t ${{ secrets.REGISTRY_NAME }}/adenacenter:$(echo $GITHUB_SHA | head -c7) \
+            -t ${{ secrets.REGISTRY_NAME }}/adenacenter:${{ env.SHORT_SHA }} \
             -t ${{ secrets.REGISTRY_NAME }}/adenacenter:latest \
             .
 
@@ -39,4 +42,4 @@ jobs:
         with:
           git_remote_url: 'ssh://dokku@${{ secrets.VPS_IP }}:22/adenacenter-dev'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          deploy_docker_image: ${{ secrets.REGISTRY_NAME }}/adenacenter:$(echo $GITHUB_SHA | head -c7)
+          deploy_docker_image: ${{ secrets.REGISTRY_NAME }}/adenacenter:${{ env.SHORT_SHA }}
