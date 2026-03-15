@@ -1,11 +1,4 @@
-"use client";
-
-import { useState } from "react";
 import {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
   ShieldCheck,
   Users,
   FileText,
@@ -13,96 +6,17 @@ import {
   Stethoscope,
   Activity,
   Presentation,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Menu,
-  X,
   ChevronRight
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "@/components/Logo";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function Home() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
-      {/* Top Bar */}
-      <div className="bg-slate-900 text-slate-300 py-2 text-sm hidden md:block">
-        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center max-w-7xl">
-          <div className="flex items-center space-x-6">
-            <a href="mailto:info@adenaoshcenter.co.ke" className="flex items-center hover:text-white transition-colors">
-              <Mail className="w-4 h-4 mr-2" />
-              info@adenaoshcenter.co.ke
-            </a>
-            <a href="tel:+254708775657" className="flex items-center hover:text-white transition-colors">
-              <Phone className="w-4 h-4 mr-2" />
-              +254 708 775 657
-            </a>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center">
-              <MapPin className="w-4 h-4 mr-2" />
-              Acacia Centre, Nyerere Avenue, Mombasa
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-          <div className="flex justify-between items-center h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <Logo className="h-10 w-auto md:h-12" />
-            </Link>
-
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-blue-600 font-medium">Home</Link>
-              <Link href="#services" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">Our Services</Link>
-              <Link href="#about" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">About Us</Link>
-              <Link href="#news" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">News</Link>
-              <Link href="#contact" className="text-slate-600 hover:text-blue-600 font-medium transition-colors">Contact Us</Link>
-            </nav>
-
-            {/* CTA Button */}
-            <div className="hidden md:block">
-              <Link href="#contact" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-medium transition-colors shadow-sm">
-                Make Appointment
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button 
-              className="md:hidden text-slate-600 p-2"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
-            <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-              <Link href="/" className="text-blue-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
-              <Link href="#services" className="text-slate-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Our Services</Link>
-              <Link href="#about" className="text-slate-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
-              <Link href="#news" className="text-slate-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>News</Link>
-              <Link href="#contact" className="text-slate-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
-              <Link href="#contact" className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-medium text-center mt-4" onClick={() => setIsMobileMenuOpen(false)}>
-                Make Appointment
-              </Link>
-            </div>
-          </div>
-        )}
-      </header>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="relative bg-white overflow-hidden">
@@ -121,7 +35,7 @@ export default function Home() {
                 We are a locally owned and operated medical specialist center recognized by the Ministry of Labour and Social Protection&apos;s Directorate of Safety and Health Services (DOSHS) for our quality occupational safety and health services.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="#contact" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-medium text-lg text-center transition-colors shadow-md flex items-center justify-center">
+                <Link href="/appointment" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-medium text-lg text-center transition-colors shadow-md flex items-center justify-center">
                   Book an Appointment
                   <ChevronRight className="ml-2 w-5 h-5" />
                 </Link>
@@ -341,102 +255,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer id="contact" className="bg-slate-900 text-slate-300 pt-20 pb-10">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-            
-            {/* Brand & Socials */}
-            <div>
-              <Link href="/" className="flex items-center mb-6 bg-white p-2 px-3 rounded-xl inline-block">
-                <Logo className="h-10 w-auto" />
-              </Link>
-              <p className="text-slate-400 mb-6">
-                Leading The Way To Safer Workplaces. Recognized by the Ministry of Labour and Social Protection&apos;s Directorate of Safety and Health Services (DOSHS).
-              </p>
-              <div className="flex space-x-4">
-                <a href="https://www.facebook.com/share/1B7tZTVGDF/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
-                  <Facebook className="w-5 h-5" />
-                </a>
-                <a href="https://x.com/adenaohscenter?t=SA3urMDbaAfPK42IshqpLg&s=09" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-colors">
-                  <Twitter className="w-5 h-5" />
-                </a>
-                <a href="https://www.instagram.com/adenaoshcenter" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-colors">
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a href="https://www.linkedin.com/company/adena-occupational-health-and-safety-center/posts" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-700 hover:text-white transition-colors">
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                {/* TikTok custom icon or text fallback */}
-                <a href="https://www.tiktok.com/@adenaoshcenter?_r=1&_t=ZM-91m2e6sI0Ka" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-black hover:text-white transition-colors font-bold text-xs">
-                  TT
-                </a>
-              </div>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h4 className="text-lg font-bold text-white mb-6">Quick Links</h4>
-              <ul className="space-y-3">
-                <li><Link href="/" className="hover:text-blue-400 transition-colors">Home</Link></li>
-                <li><Link href="#about" className="hover:text-blue-400 transition-colors">About Us</Link></li>
-                <li><Link href="#services" className="hover:text-blue-400 transition-colors">Our Services</Link></li>
-                <li><Link href="#news" className="hover:text-blue-400 transition-colors">News</Link></li>
-                <li><Link href="#contact" className="hover:text-blue-400 transition-colors">Contact Us</Link></li>
-              </ul>
-            </div>
-
-            {/* Contact Info */}
-            <div>
-              <h4 className="text-lg font-bold text-white mb-6">Contact Us</h4>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <MapPin className="w-5 h-5 mr-3 text-blue-500 shrink-0 mt-0.5" />
-                  <span>Acacia Centre, Nyerere Avenue, Mombasa</span>
-                </li>
-                <li className="flex items-center">
-                  <Phone className="w-5 h-5 mr-3 text-blue-500 shrink-0" />
-                  <a href="tel:+254708775657" className="hover:text-white transition-colors">+254 708 775 657</a>
-                </li>
-                <li className="flex items-center">
-                  <Mail className="w-5 h-5 mr-3 text-blue-500 shrink-0" />
-                  <a href="mailto:info@adenaoshcenter.co.ke" className="hover:text-white transition-colors">info@adenaoshcenter.co.ke</a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Opening Hours */}
-            <div>
-              <h4 className="text-lg font-bold text-white mb-6">Opening Hours</h4>
-              <ul className="space-y-3">
-                <li className="flex justify-between border-b border-slate-800 pb-2">
-                  <span>Monday - Friday</span>
-                  <span className="text-white">8:00 AM - 5:00 PM</span>
-                </li>
-                <li className="flex justify-between border-b border-slate-800 pb-2">
-                  <span>Saturday</span>
-                  <span className="text-white">9:00 AM - 1:00 PM</span>
-                </li>
-                <li className="flex justify-between pb-2">
-                  <span>Sunday</span>
-                  <span className="text-rose-400">Closed</span>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-
-          <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-slate-500 mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} adenaoshcenter. All Rights Reserved.
-            </p>
-            <div className="flex space-x-6 text-sm text-slate-500">
-              <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
