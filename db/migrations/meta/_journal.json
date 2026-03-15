@@ -15,6 +15,13 @@
       "when": 1773585540207,
       "tag": "0001_legal_hammerhead",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1773600225687,
+      "tag": "0002_pretty_tusk",
+      "breakpoints": true
     }
   ]
 }
