@@ -1,0 +1,35 @@
+name: Build and Push to DOCR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install doctl
+        # Uses the official DigitalOcean GitHub Action
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry
+        # Authenticates Docker using doctl
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Build container image
+        run: |
+          docker build \
+            -t ${{ secrets.REGISTRY_NAME }}/adenacenter:$(echo $GITHUB_SHA | head -c7) \
+            -t ${{ secrets.REGISTRY_NAME }}/adenacenter:latest \
+            .
+
+      - name: Push image to DigitalOcean Container Registry
+        run: docker push -a ${{ secrets.REGISTRY_NAME }}/adenacenter
