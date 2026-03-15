@@ -33,3 +33,10 @@ jobs:
 
       - name: Push image to DigitalOcean Container Registry
         run: docker push -a ${{ secrets.REGISTRY_NAME }}/adenacenter
+
+      - name: Push to dokku
+        uses: dokku/github-action@master
+        with:
+          git_remote_url: 'ssh://dokku@${{ secrets.VPS_IP }}:22/adenacenter-dev'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          deploy_docker_image: ${{ secrets.REGISTRY_NAME }}/adenacenter:$(echo $GITHUB_SHA | head -c7)
