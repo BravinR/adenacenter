@@ -1,0 +1,31 @@
+# Dependencies
+node_modules
+.npm
+
+# Next.js build output
+.next
+out
+
+# Environment files — never bake secrets into the image
+.env
+.env.*
+!.env.example
+
+# Git & editor
+.git
+.gitignore
+.github
+.vscode
+.idea
+
+# Drizzle migration artifacts (schema is applied separately)
+db/migrations
+
+# Misc
+*.log
+*.md
+README*
+PLAN.md
+Dockerfile
+.dockerignore
+docker-compose*.yml
