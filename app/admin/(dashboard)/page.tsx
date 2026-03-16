@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { db } from "@/db";
-import { appointments, funnelEvents } from "@/db/schema";
-import { desc, sql } from "drizzle-orm";
-import { CalendarDays, Clock, CheckCircle, TrendingDown, Users, ArrowRight } from "lucide-react";
+import { appointments, funnelEvents, contactMessages } from "@/db/schema";
+import { desc, eq, sql } from "drizzle-orm";
+import { CalendarDays, Clock, CheckCircle, TrendingDown, Users, ArrowRight, MessageSquare } from "lucide-react";
 
 // ---------------------------------------------------------------------------
 // Data fetching
@@ -15,6 +15,9 @@ async function getStats() {
     byService,
     recentAppointments,
     funnelStats,
+    msgTotalResult,
+    msgUnreadResult,
+    recentMessages,
   ] = await Promise.all([
     // Total appointments
     db.select({ count: sql<number>`count(*)::int` }).from(appointments),
@@ -45,6 +48,13 @@ async function getStats() {
       .select({ step: funnelEvents.step, event: funnelEvents.event, count: sql<number>`count(distinct session_id)::int` })
       .from(funnelEvents)
       .groupBy(funnelEvents.step, funnelEvents.event),
+
+    // Contact message counts
+    db.select({ count: sql<number>`count(*)::int` }).from(contactMessages),
+    db.select({ count: sql<number>`count(*)::int` }).from(contactMessages).where(eq(contactMessages.read, false)),
+
+    // 5 most recent messages
+    db.select().from(contactMessages).orderBy(desc(contactMessages.createdAt)).limit(5),
   ]);
 
   const total = totalResult[0]?.count ?? 0;
@@ -57,7 +67,13 @@ async function getStats() {
     step2Completions: funnelStats.find(r => r.step === 2 && r.event === "completed")?.count ?? 0,
   };
 
-  return { total, statusMap, byService, recentAppointments, funnel };
+  const messages = {
+    total:  msgTotalResult[0]?.count  ?? 0,
+    unread: msgUnreadResult[0]?.count ?? 0,
+    recent: recentMessages,
+  };
+
+  return { total, statusMap, byService, recentAppointments, funnel, messages };
 }
 
 // ---------------------------------------------------------------------------
@@ -65,7 +81,7 @@ async function getStats() {
 // ---------------------------------------------------------------------------
 
 export default async function AdminPage() {
-  const { total, statusMap, byService, recentAppointments, funnel } = await getStats();
+  const { total, statusMap, byService, recentAppointments, funnel, messages } = await getStats();
 
   const step1DropOff = funnel.step1Views > 0
     ? Math.round((1 - funnel.step1Completions / funnel.step1Views) * 100)
@@ -87,7 +103,7 @@ export default async function AdminPage() {
       </div>
 
       {/* Top stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
         <StatCard
           icon={<CalendarDays className="w-5 h-5" />}
           label="Total Appointments"
@@ -111,6 +127,13 @@ export default async function AdminPage() {
           label="Form Visits"
           value={funnel.step1Views}
           color="indigo"
+        />
+        <StatCard
+          icon={<MessageSquare className="w-5 h-5" />}
+          label="Contact Messages"
+          value={messages.total}
+          color="violet"
+          badge={messages.unread > 0 ? `${messages.unread} unread` : undefined}
         />
       </div>
 
@@ -150,6 +173,39 @@ export default async function AdminPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Recent messages */}
+      <section>
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-lg font-bold text-slate-900">Recent Messages</h2>
+          <Link href="/admin/messages" className="flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors">
+            View all <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden divide-y divide-slate-50">
+          {messages.recent.length === 0 ? (
+            <p className="text-sm text-slate-400 p-6">No messages yet.</p>
+          ) : messages.recent.map(msg => (
+            <Link
+              key={msg.id}
+              href="/admin/messages"
+              className={`flex items-start gap-3 px-5 py-4 hover:bg-slate-50 transition-colors ${!msg.read ? "bg-blue-50/40" : ""}`}
+            >
+              <span className={`mt-2 w-2 h-2 rounded-full shrink-0 ${!msg.read ? "bg-blue-500" : "bg-slate-200"}`} />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-2">
+                  <p className={`text-sm font-semibold truncate ${!msg.read ? "text-slate-900" : "text-slate-700"}`}>{msg.name}</p>
+                  <span className="text-xs text-slate-400 shrink-0">
+                    {new Date(msg.createdAt).toLocaleDateString("en-KE", { day: "numeric", month: "short" })}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 truncate">{msg.email}</p>
+                <p className="text-sm text-slate-500 truncate mt-0.5">{msg.message}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -242,19 +298,28 @@ const colorMap = {
   amber:   { bg: "bg-amber-100",   text: "text-amber-600"   },
   emerald: { bg: "bg-emerald-100", text: "text-emerald-600" },
   indigo:  { bg: "bg-indigo-100",  text: "text-indigo-600"  },
+  violet:  { bg: "bg-violet-100",  text: "text-violet-600"  },
 };
 
-function StatCard({ icon, label, value, color }: {
+function StatCard({ icon, label, value, color, badge }: {
   icon: React.ReactNode;
   label: string;
   value: number;
   color: keyof typeof colorMap;
+  badge?: string;
 }) {
   const { bg, text } = colorMap[color];
   return (
     <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-      <div className={`w-10 h-10 ${bg} ${text} rounded-xl flex items-center justify-center mb-4`}>
-        {icon}
+      <div className="flex items-start justify-between mb-4">
+        <div className={`w-10 h-10 ${bg} ${text} rounded-xl flex items-center justify-center`}>
+          {icon}
+        </div>
+        {badge && (
+          <span className="text-xs font-semibold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
+            {badge}
+          </span>
+        )}
       </div>
       <p className="text-2xl font-bold text-slate-900">{value.toLocaleString()}</p>
       <p className="text-sm text-slate-500 mt-1">{label}</p>
