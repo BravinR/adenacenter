@@ -560,7 +560,7 @@ function ContactCard() {
       <ul className="space-y-5">
         {[
           { icon: Phone, label: "Phone", content: <a href="tel:+254708775657" className="text-slate-800 font-semibold hover:text-blue-600 transition-colors">0708775657</a> },
-          { icon: Mail, label: "Email", content: <a href="mailto:info@adenaoshcenter.co.ke" className="text-slate-800 font-semibold hover:text-blue-600 transition-colors break-all">info@adenaoshcenter.co.ke</a> },
+          { icon: Mail, label: "Email", content: <a href="mailto:info@adenaoshcentre.com" className="text-slate-800 font-semibold hover:text-blue-600 transition-colors break-all">info@adenaoshcentre.com</a> },
           { icon: MapPin, label: "Location", content: <p className="text-slate-800 font-semibold">Acacia Centre, Nyerere Avenue, Mombasa</p> },
         ].map(({ icon: Icon, label, content }) => (
           <li key={label} className="flex items-start gap-4">

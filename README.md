@@ -43,7 +43,7 @@ cp .env.example .env
 | Variable | Description |
 |---|---|
 | `DATABASE_URL` | PostgreSQL connection string |
-| `APP_URL` | Public URL of the site (e.g. `https://adenaoshcenter.com`) |
+| `APP_URL` | Public URL of the site (e.g. `https://adenaoshcentre.com`) |
 
 ### 3. Run database migrations
 

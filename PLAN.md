@@ -46,7 +46,7 @@ Single-page app (`app/page.tsx`) with anchor-link navigation. All sections (Hero
 - Contact form (name, email, message)
 - Address: Acacia Centre, Nyerere Avenue, Mombasa
 - Phone: +254 708 775 657
-- Email: info@adenaoshcenter.co.ke
+- Email: info@adenaoshcentre.com
 - Opening hours
 - Embedded Google Map (Acacia Centre, Mombasa)
 - Update nav "Contact Us" link from `#contact` → `/contact`

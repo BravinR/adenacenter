@@ -22,6 +22,18 @@ export const appointments = pgTable("appointments", {
 export type Appointment = typeof appointments.$inferSelect;
 export type NewAppointment = typeof appointments.$inferInsert;
 
+export const contactMessages = pgTable("contact_messages", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  phone: varchar("phone", { length: 50 }),
+  message: text("message").notNull(),
+  read: boolean("read").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type ContactMessage = typeof contactMessages.$inferSelect;
+
 // Tracks per-session funnel events for drop-off analysis
 export const funnelEvents = pgTable("funnel_events", {
   id: serial("id").primaryKey(),
@@ -48,6 +60,8 @@ export const user = pgTable("user", {
   banned: boolean("banned").default(false),
   banReason: text("ban_reason"),
   banExpires: timestamp("ban_expires"),
+  // forces password change on next login
+  mustChangePassword: boolean("must_change_password").default(false).notNull(),
 });
 
 export const session = pgTable(

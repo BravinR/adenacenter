@@ -39,7 +39,7 @@ export default function Home() {
                   Book an Appointment
                   <ChevronRight className="ml-2 w-5 h-5" />
                 </Link>
-                <Link href="#services" className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-8 py-4 rounded-full font-medium text-lg text-center transition-colors shadow-sm">
+                <Link href="/services" className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-8 py-4 rounded-full font-medium text-lg text-center transition-colors shadow-sm">
                   Explore Services
                 </Link>
               </div>
@@ -213,18 +213,21 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
+                slug: "understanding-doshs-fitness-certificates",
                 title: "New DOSHS Guidelines for 2026",
                 date: "March 10, 2026",
                 image: "https://picsum.photos/seed/guidelines/600/400",
                 excerpt: "Learn about the latest updates to occupational safety standards and how they impact your business."
               },
               {
+                slug: "pre-employment-medical-guide",
                 title: "Importance of Regular Employee Health Screenings",
                 date: "February 24, 2026",
                 image: "https://picsum.photos/seed/screening/600/400",
                 excerpt: "Discover why routine health checks are crucial for maintaining a productive and healthy workforce."
               },
               {
+                slug: "mental-health-workplace-kenya",
                 title: "Mental Health in the Workplace",
                 date: "February 15, 2026",
                 image: "https://picsum.photos/seed/mentalhealth/600/400",
@@ -233,10 +236,10 @@ export default function Home() {
             ].map((post, i) => (
               <div key={i} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
                 <div className="aspect-video relative">
-                  <Image 
-                    src={post.image} 
-                    alt={post.title} 
-                    fill 
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
                     className="object-cover"
                     referrerPolicy="no-referrer"
                   />
@@ -245,7 +248,7 @@ export default function Home() {
                   <span className="text-sm text-blue-600 font-semibold mb-2">{post.date}</span>
                   <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2">{post.title}</h3>
                   <p className="text-slate-600 mb-4 flex-1">{post.excerpt}</p>
-                  <Link href="#" className="text-blue-600 font-medium inline-flex items-center hover:text-blue-700 transition-colors mt-auto">
+                  <Link href={`/news/${post.slug}`} className="text-blue-600 font-medium inline-flex items-center hover:text-blue-700 transition-colors mt-auto">
                     Read More <ChevronRight className="w-4 h-4 ml-1" />
                   </Link>
                 </div>

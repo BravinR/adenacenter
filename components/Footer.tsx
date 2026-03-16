@@ -23,13 +23,13 @@ export default function Footer() {
               <a href="https://x.com/adenaohscenter?t=SA3urMDbaAfPK42IshqpLg&s=09" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="https://www.instagram.com/adenaoshcenter" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-colors">
+              <a href="https://www.instagram.com/adenaoshcentre" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
               <a href="https://www.linkedin.com/company/adena-occupational-health-and-safety-center/posts" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-700 hover:text-white transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="https://www.tiktok.com/@adenaoshcenter?_r=1&_t=ZM-91m2e6sI0Ka" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-black hover:text-white transition-colors font-bold text-xs">
+              <a href="https://www.tiktok.com/@adenaoshcentre?_r=1&_t=ZM-91m2e6sI0Ka" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-black hover:text-white transition-colors font-bold text-xs">
                 TT
               </a>
             </div>
@@ -62,7 +62,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 mr-3 text-blue-500 shrink-0" />
-                <a href="mailto:info@adenaoshcenter.co.ke" className="hover:text-white transition-colors">info@adenaoshcenter.co.ke</a>
+                <a href="mailto:info@adenaoshcentre.com" className="hover:text-white transition-colors">info@adenaoshcentre.com</a>
               </li>
             </ul>
           </div>
@@ -90,7 +90,7 @@ export default function Footer() {
 
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-slate-500 mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} adenaoshcenter. All Rights Reserved.
+            &copy; {new Date().getFullYear()} adenaoshcentre. All Rights Reserved.
           </p>
           <div className="flex space-x-6 text-sm text-slate-500">
             <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>

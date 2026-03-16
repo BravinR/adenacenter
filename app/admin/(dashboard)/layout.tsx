@@ -1,6 +1,9 @@
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { eq } from "drizzle-orm";
 import { auth } from "@/lib/auth";
+import { db } from "@/db";
+import { user } from "@/db/schema";
 import AdminNav from "@/components/AdminNav";
 
 export const metadata = {
@@ -16,6 +19,15 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   if (session.user.role !== "admin") {
     redirect("/admin/login");
+  }
+
+  // Check if admin must change their temporary password
+  const [dbUser] = await db.select({ mustChangePassword: user.mustChangePassword })
+    .from(user)
+    .where(eq(user.id, session.user.id));
+
+  if (dbUser?.mustChangePassword) {
+    redirect("/admin/change-password");
   }
 
   return (

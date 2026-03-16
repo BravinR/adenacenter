@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { signIn } from "@/lib/auth-client";
 import Logo from "@/components/Logo";
 import { ShieldCheck } from "lucide-react";
@@ -57,16 +58,21 @@ export default function AdminLoginPage() {
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="admin@adenaoshcenter.co.ke"
+                placeholder="admin@adenaoshcentre.com"
                 required
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition hover:border-slate-300"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-1.5">
-                Password
-              </label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-sm font-semibold text-slate-700">
+                  Password
+                </label>
+                <Link href="/admin/forgot-password" className="text-xs text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                  Forgot password?
+                </Link>
+              </div>
               <input
                 type="password"
                 value={password}

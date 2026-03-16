@@ -14,9 +14,9 @@ export default function Navbar() {
       <div className="bg-slate-900 text-slate-300 py-2 text-sm hidden md:block">
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center max-w-7xl">
           <div className="flex items-center space-x-6">
-            <a href="mailto:info@adenaoshcenter.co.ke" className="flex items-center hover:text-white transition-colors">
+            <a href="mailto:info@adenaoshcentre.com" className="flex items-center hover:text-white transition-colors">
               <Mail className="w-4 h-4 mr-2" />
-              info@adenaoshcenter.co.ke
+              info@adenaoshcentre.com
             </a>
             <a href="tel:+254708775657" className="flex items-center hover:text-white transition-colors">
               <Phone className="w-4 h-4 mr-2" />

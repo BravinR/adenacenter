@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { LogOut, LayoutDashboard } from "lucide-react";
+import { LogOut, LayoutDashboard, CalendarDays, MessageSquare } from "lucide-react";
 import Logo from "@/components/Logo";
 import { signOut } from "@/lib/auth-client";
 
@@ -35,6 +35,20 @@ export default function AdminNav({ user }: Props) {
             >
               <LayoutDashboard className="w-4 h-4" />
               Dashboard
+            </Link>
+            <Link
+              href="/admin/appointments"
+              className="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors"
+            >
+              <CalendarDays className="w-4 h-4" />
+              Appointments
+            </Link>
+            <Link
+              href="/admin/messages"
+              className="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors"
+            >
+              <MessageSquare className="w-4 h-4" />
+              Messages
             </Link>
           </div>
 

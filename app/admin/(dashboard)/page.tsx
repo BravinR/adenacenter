@@ -1,7 +1,8 @@
+import Link from "next/link";
 import { db } from "@/db";
 import { appointments, funnelEvents } from "@/db/schema";
-import { desc, eq, sql } from "drizzle-orm";
-import { CalendarDays, Clock, CheckCircle, TrendingDown, Users } from "lucide-react";
+import { desc, sql } from "drizzle-orm";
+import { CalendarDays, Clock, CheckCircle, TrendingDown, Users, ArrowRight } from "lucide-react";
 
 // ---------------------------------------------------------------------------
 // Data fetching
@@ -183,7 +184,12 @@ export default async function AdminPage() {
 
         {/* Recent appointments */}
         <section>
-          <h2 className="text-lg font-bold text-slate-900 mb-5">Recent Appointments</h2>
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="text-lg font-bold text-slate-900">Recent Appointments</h2>
+            <Link href="/admin/appointments" className="flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors">
+              View all <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
             {recentAppointments.length === 0 ? (
               <p className="text-sm text-slate-400 p-6">No appointments yet.</p>

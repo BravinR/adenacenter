@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { appointments } from "@/db/schema";
+import { sendAppointmentNotificationEmail } from "@/lib/email";
 
 const REQUIRED_FIELDS = ["fullName", "phone", "service", "preferredDate", "preferredTime"] as const;
 
@@ -40,6 +41,19 @@ export async function POST(req: NextRequest) {
         status: "pending",
       })
       .returning();
+
+    // Notify admin — fire-and-forget, never block the response
+    sendAppointmentNotificationEmail({
+      id: appointment.id,
+      fullName: appointment.fullName,
+      phone: appointment.phone,
+      email: appointment.email ?? null,
+      company: appointment.company ?? null,
+      service: appointment.service,
+      preferredDate: appointment.preferredDate,
+      preferredTime: appointment.preferredTime,
+      notes: appointment.notes ?? null,
+    }).catch(err => console.error("[email] appointment-notification:", err));
 
     return NextResponse.json({ success: true, id: appointment.id }, { status: 201 });
   } catch (err) {
