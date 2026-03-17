@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      deploy_to_production:
+        description: 'Deploy to production (adenacenter)?'
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -37,9 +44,17 @@ jobs:
       - name: Push image to DigitalOcean Container Registry
         run: docker push -a ${{ secrets.REGISTRY_NAME }}/adenacenter
 
-      - name: Push to dokku
+      - name: Push to dokku (dev)
         uses: dokku/github-action@master
         with:
           git_remote_url: 'ssh://dokku@${{ secrets.VPS_IP }}:22/adenacenter-dev'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          deploy_docker_image: ${{ secrets.REGISTRY_NAME }}/adenacenter:${{ env.SHORT_SHA }}
+
+      - name: Push to dokku (production)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_to_production == true }}
+        uses: dokku/github-action@master
+        with:
+          git_remote_url: 'ssh://dokku@${{ secrets.VPS_IP }}:22/adenacenter'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           deploy_docker_image: ${{ secrets.REGISTRY_NAME }}/adenacenter:${{ env.SHORT_SHA }}
