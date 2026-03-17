@@ -14,6 +14,7 @@ on:
 
 jobs:
   build:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,7 +24,7 @@ jobs:
 
       - name: Install doctl
         # Uses the official DigitalOcean GitHub Action
-        uses: digitalocean/action-doctl@v2
+        uses: digitalocean/action-doctl@v2.5.1
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
@@ -51,10 +52,13 @@ jobs:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           deploy_docker_image: ${{ secrets.REGISTRY_NAME }}/adenacenter:${{ env.SHORT_SHA }}
 
+  deploy-production:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_to_production == true }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Push to dokku (production)
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy_to_production == true }}
         uses: dokku/github-action@master
         with:
           git_remote_url: 'ssh://dokku@${{ secrets.VPS_IP }}:22/adenacenter'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          deploy_docker_image: ${{ secrets.REGISTRY_NAME }}/adenacenter:${{ env.SHORT_SHA }}
+          deploy_docker_image: --force ${{ secrets.REGISTRY_NAME }}/adenacenter:latest
