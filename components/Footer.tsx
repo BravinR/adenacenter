@@ -14,6 +14,7 @@ export default function Footer() {
               <Image src="/logo.svg" alt="Adena's Logo"  
                 width={200}
                 height={200}
+                unoptimized
               />
             </Link>
             <p className="text-slate-400 mb-6">

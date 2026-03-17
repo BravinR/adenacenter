@@ -38,6 +38,7 @@ export default function Navbar() {
               <Image src="/logo.svg" alt="Adena's Logo"  
                 width={200}
                 height={200}
+                unoptimized
               />
             </Link>
 
