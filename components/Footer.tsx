@@ -1,6 +1,6 @@
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
-import Logo from "@/components/Logo";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -11,7 +11,10 @@ export default function Footer() {
           {/* Brand & Socials */}
           <div>
             <Link href="/" className="flex items-center mb-6 bg-white p-2 px-3 rounded-xl">
-              <Logo className="h-10 w-auto" />
+              <Image src="/logo.svg" alt="Adena's Logo"  
+                width={200}
+                height={200}
+              />
             </Link>
             <p className="text-slate-400 mb-6">
               Leading The Way To Safer Workplaces. Recognized by the Ministry of Labour and Social Protection&apos;s Directorate of Safety and Health Services (DOSHS).
@@ -62,7 +65,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 mr-3 text-blue-500 shrink-0" />
-                <a href="mailto:info@adenaoshcentre.com" className="hover:text-white transition-colors">info@adenaoshcentre.com</a>
+                <a href="mailto:info@adenaoshcentre.com" className="hover:text-white transition-colors">info@adenaoshcentre.co.ke</a>
               </li>
             </ul>
           </div>

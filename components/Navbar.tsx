@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Phone, Mail, MapPin, Menu, X, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
-import Logo from "@/components/Logo";
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -35,7 +35,10 @@ export default function Navbar() {
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="flex justify-between items-center h-20">
             <Link href="/" className="flex items-center">
-              <Logo className="h-10 w-auto md:h-12" />
+              <Image src="/logo.svg" alt="Adena's Logo"  
+                width={200}
+                height={200}
+              />
             </Link>
 
             {/* Desktop Nav */}
