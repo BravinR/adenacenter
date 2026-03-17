@@ -24,24 +24,29 @@ const TEAM = [
   {
     name: "Dr. Adena Mwangi",
     role: "Medical Director & Occupational Physician",
-    image: "https://picsum.photos/seed/doc1/400/400",
   },
   {
     name: "Dr. Fatuma Ali",
     role: "General Practitioner",
-    image: "https://picsum.photos/seed/doc2/400/400",
   },
   {
     name: "Ms. Grace Otieno",
     role: "Registered Dietitian & Nutritionist",
-    image: "https://picsum.photos/seed/doc3/400/400",
   },
   {
     name: "Mr. James Kariuki",
     role: "Occupational Health Nurse",
-    image: "https://picsum.photos/seed/doc4/400/400",
   },
 ];
+
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .filter((part) => /^[A-Za-z]/.test(part))
+    .slice(-2)
+    .map((part) => part[0].toUpperCase())
+    .join("");
+}
 
 const VALUES = [
   {
@@ -214,20 +219,12 @@ export default function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {TEAM.map((member) => (
-              <div key={member.name} className="bg-white rounded-2xl shadow-sm overflow-hidden border border-slate-100 text-center">
-                <div className="relative aspect-square">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                    referrerPolicy="no-referrer"
-                  />
+              <div key={member.name} className="bg-white rounded-2xl shadow-sm border border-slate-100 text-center p-8">
+                <div className="w-20 h-20 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-2xl font-bold mx-auto mb-5">
+                  {getInitials(member.name)}
                 </div>
-                <div className="p-5">
-                  <p className="font-bold text-slate-900">{member.name}</p>
-                  <p className="text-sm text-slate-500 mt-1">{member.role}</p>
-                </div>
+                <p className="font-bold text-slate-900">{member.name}</p>
+                <p className="text-sm text-slate-500 mt-1">{member.role}</p>
               </div>
             ))}
           </div>
