@@ -1,7 +1,7 @@
 # Adena OSH Center — Site Plan
 
 ## Current State
-Single-page app (`app/page.tsx`) with anchor-link navigation. All sections (Hero, About, Services, News, Contact/Footer) live on one page. Nav links (`#services`, `#about`, `#news`, `#contact`) and both "Make Appointment" CTAs point to `#contact` (the footer).
+Single-page app (``) with anchor-link navigation. All sections (Hero, About, Services, News, Contact/Footer) live on one page. Nav links (`#services`, `#about`, `#news`, `#contact`) and both "Make Appointment" CTAs point to `#contact` (the footer).
 
 ---
 
