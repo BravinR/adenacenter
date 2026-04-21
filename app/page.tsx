@@ -28,7 +28,7 @@ export default function Home() {
                 <ShieldCheck className="w-4 h-4" />
                 <span>DOSHS Recognized Center</span>
               </div>
-              <h1 className="text-5xl md:text-5xl lg:text-4xl font-extrabold text-slate-900 leading-tight mb-6 tracking-tight">
+              <h1 className="text-5xl md:text-5xl lg:text-5xl font-extrabold text-slate-900 leading-tight mb-6 tracking-tight">
                 Leading The Way To <span className="text-blue-600">Safer Workplaces</span>
               </h1>
               <p className="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed">
@@ -46,10 +46,10 @@ export default function Home() {
             </div>
             <div className="relative hidden md:block">
               <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl relative z-10">
-                <Image 
-                  src="/16.png" 
-                  alt="Medical Professionals" 
-                  fill 
+                <Image
+                  src="/16.png"
+                  alt="Medical Professionals"
+                  fill
                   className="object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -68,10 +68,10 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative">
               <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-xl relative z-10">
-                <Image 
-                  src="/adena about.jpg" 
-                  alt="Adena Center Facility" 
-                  fill 
+                <Image
+                  src="/adena about.jpg"
+                  alt="Adena Center Facility"
+                  fill
                   className="object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -159,7 +159,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Digital Data Management</h3>
               <p className="text-slate-600 leading-relaxed">
-                All medical records in our care are securely stored and shared* in digital format. We carefully analyze collected data and present it in intelligent reports for HR departments and top-level management. <br/><span className="text-sm italic mt-2 block">*Shared in accordance with national data protection guidelines.</span>
+                All medical records in our care are securely stored and shared* in digital format. We carefully analyze collected data and present it in intelligent reports for HR departments and top-level management. <br /><span className="text-sm italic mt-2 block">*Shared in accordance with national data protection guidelines.</span>
               </p>
             </div>
 
@@ -209,7 +209,7 @@ export default function Home() {
               Stay informed with our latest insights on occupational health, safety guidelines, and wellness programs.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
