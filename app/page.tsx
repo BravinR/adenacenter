@@ -28,7 +28,7 @@ export default function Home() {
                 <ShieldCheck className="w-4 h-4" />
                 <span>DOSHS Recognized Center</span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6 tracking-tight">
+              <h1 className="text-5xl md:text-5xl lg:text-4xl font-extrabold text-slate-900 leading-tight mb-6 tracking-tight">
                 Leading The Way To <span className="text-blue-600">Safer Workplaces</span>
               </h1>
               <p className="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed">
@@ -47,7 +47,7 @@ export default function Home() {
             <div className="relative hidden md:block">
               <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl relative z-10">
                 <Image 
-                  src="https://picsum.photos/seed/medical/800/800" 
+                  src="/16.png" 
                   alt="Medical Professionals" 
                   fill 
                   className="object-cover"
@@ -69,7 +69,7 @@ export default function Home() {
             <div className="relative">
               <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-xl relative z-10">
                 <Image 
-                  src="https://picsum.photos/seed/clinic/800/600" 
+                  src="/adena about.jpg" 
                   alt="Adena Center Facility" 
                   fill 
                   className="object-cover"
@@ -216,21 +216,21 @@ export default function Home() {
                 slug: "understanding-doshs-fitness-certificates",
                 title: "New DOSHS Guidelines for 2026",
                 date: "March 10, 2026",
-                image: "https://picsum.photos/seed/guidelines/600/400",
+                image: "/2.png",
                 excerpt: "Learn about the latest updates to occupational safety standards and how they impact your business."
               },
               {
                 slug: "pre-employment-medical-guide",
                 title: "Importance of Regular Employee Health Screenings",
                 date: "February 24, 2026",
-                image: "https://picsum.photos/seed/screening/600/400",
+                image: "/eye.png",
                 excerpt: "Discover why routine health checks are crucial for maintaining a productive and healthy workforce."
               },
               {
                 slug: "mental-health-workplace-kenya",
                 title: "Mental Health in the Workplace",
                 date: "February 15, 2026",
-                image: "https://picsum.photos/seed/mentalhealth/600/400",
+                image: "/stress.png",
                 excerpt: "Strategies for HR managers to support employee mental wellbeing and reduce burnout."
               }
             ].map((post, i) => (
